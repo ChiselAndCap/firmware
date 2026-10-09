@@ -547,6 +547,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define LED_STATE_OFF (LED_STATE_ON ^ 1)
 #endif
 
+#ifdef LED_LORA
+#ifndef LED_LORA_TX
+#define LED_LORA_TX LED_LORA
+#endif
+#ifndef LED_LORA_RX
+#define LED_LORA_RX LED_LORA
+#endif
+#endif
+
 #ifndef ledOff
 #define ledOff(pin) pinMode(pin, INPUT)
 #endif

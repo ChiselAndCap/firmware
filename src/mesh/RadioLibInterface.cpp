@@ -727,8 +727,8 @@ meshtastic_MeshPacket *RadioLibInterface::detachSentPacket()
     // Cleared first: printPacket() in finishSentPacket() can take a long time.
     auto p = sendingPacket;
     sendingPacket = NULL;
-#ifdef LED_LORA
-    digitalWrite(LED_LORA, LED_STATE_OFF);
+#ifdef LED_LORA_TX
+    digitalWrite(LED_LORA_TX, LED_STATE_OFF);
 #endif
     // Keep this behind `if (p)`: completeSending() also runs on every setStandby(), where a hook
     // undoing its own pre-TX switch would recurse back through reconfigure().
@@ -910,7 +910,7 @@ void RadioLibInterface::handleReceiveInterrupt(const CapturedRxInfo *captured)
 
             printPacket("Lora RX", mp);
 
-#ifdef LED_LORA
+#ifdef LED_LORA_RX
             loraRxPacketObservable.notifyObservers(mp->from);
 #endif
 
@@ -1400,8 +1400,8 @@ bool RadioLibInterface::startSend(meshtastic_MeshPacket *txp)
             // unset-sentinel-ok: busyTx/sendingPacket is the armed flag, so 0 is a legal stamp
             lastTxStart = Time::getMillis();
             printPacket("Started Tx", txp);
-#ifdef LED_LORA
-            digitalWrite(LED_LORA, LED_STATE_ON);
+#ifdef LED_LORA_TX
+            digitalWrite(LED_LORA_TX, LED_STATE_ON);
 #endif
         }
 

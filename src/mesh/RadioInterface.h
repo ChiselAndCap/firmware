@@ -148,7 +148,7 @@ class RadioInterface
 
     virtual ~RadioInterface() {}
 
-    /// Fires once per valid received LoRa packet (arg = sender NodeNum). Used e.g. to flash LED_LORA.
+    /// Fires once per valid received LoRa packet (arg = sender NodeNum). Used e.g. to flash LED_LORA_RX.
     static Observable<uint32_t> loraRxPacketObservable;
 
     /**

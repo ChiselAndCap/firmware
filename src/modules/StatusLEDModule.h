@@ -43,7 +43,7 @@ class StatusLEDModule : private concurrency::OSThread
 #if !MESHTASTIC_EXCLUDE_INPUTBROKER
     int handleInputEvent(const InputEvent *arg);
 #endif
-#ifdef LED_LORA
+#ifdef LED_LORA_RX
     int handleLoRaRx(uint32_t sender);
 #endif
 
@@ -68,7 +68,7 @@ class StatusLEDModule : private concurrency::OSThread
     CallbackObserver<StatusLEDModule, const InputEvent *> inputObserver =
         CallbackObserver<StatusLEDModule, const InputEvent *>(this, &StatusLEDModule::handleInputEvent);
 #endif
-#ifdef LED_LORA
+#ifdef LED_LORA_RX
     CallbackObserver<StatusLEDModule, uint32_t> loraRxObserver =
         CallbackObserver<StatusLEDModule, uint32_t>(this, &StatusLEDModule::handleLoRaRx);
 #endif
@@ -84,7 +84,7 @@ class StatusLEDModule : private concurrency::OSThread
     uint32_t lastUserbuttonTime = 0;
     uint32_t POWER_LED_starttime = 0;
     bool doing_fast_blink = false;
-#ifdef LED_LORA
+#ifdef LED_LORA_RX
     static constexpr uint32_t LORA_RX_LED_FLASH_MS = 100;
     bool LORA_LED_state = LED_STATE_OFF;
     uint32_t LORA_LED_starttime = 0;
